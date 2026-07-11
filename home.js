@@ -51,7 +51,7 @@ logoutBtn?.addEventListener("click", async () => {
 // Game
 gameBtn?.addEventListener("click", () => {
 
-    window.location.href = "Maht.html";
+    window.location.href = "Math.html";
 
 });
 
