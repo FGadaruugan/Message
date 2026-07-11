@@ -1,0 +1,46 @@
+#topBox{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:290px;
+    padding:25px;
+
+    background:white;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+
+#topBox h2{
+    text-align:center;
+}
+
+
+.topHeader,
+.topRow{
+
+    display:grid;
+    grid-template-columns:50px 1fr 50px 90px;
+
+    align-items:center;
+
+    padding:12px 5px;
+
+}
+
+
+.topHeader{
+    font-weight:bold;
+    border-bottom:2px solid #ddd;
+}
+
+
+.topRow{
+    margin-top:8px;
+
+    background:#f8f8f8;
+
+    border-radius:12px;
+}
