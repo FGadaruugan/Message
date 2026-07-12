@@ -28,13 +28,13 @@ checkBtn.addEventListener("click", async()=>{
 
     if(Number(answer.value) === correct){
 
-        result.textContent = "✅ Зөв! +10 Оноо";
+        result.textContent = "✅ Зөв! +2 Оноо";
 
         const user = auth.currentUser;
 
         if(user){
 
-            await addScore(user.uid,10);
+            await addScore(user.uid,2);
 
         }
 
