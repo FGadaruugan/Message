@@ -70,39 +70,3 @@ topList.innerHTML = html;
 }
 
 loadTop();
-    snap.forEach((doc)=>{
-
-        const user = doc.data();
-
-        html += `
-
-        <div class="topRow">
-
-            <span>${rank}</span>
-
-            <span>
-            ${user.firstname} ${user.lastname}
-            </span>
-
-            <span>
-            ⭐ ${user.level}
-            </span>
-
-            <span>
-            🏆 ${user.score}
-            </span>
-
-        </div>
-
-        `;
-
-        rank++;
-
-    });
-
-
-    topList.innerHTML = html;
-
-}
-
-loadTop();
