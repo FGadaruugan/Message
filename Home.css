@@ -1,89 +1,301 @@
-body{
+*{
     margin:0;
-    background:#f5f5f5;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
 
-#navbar{
-    position:fixed;
-    top:10px;
-    left:10px;
-    right:10px;
+body{
+    background:#eef2f8;
+    padding:12px;
+}
 
-    background:#fff;
-    border-radius:18px;
-    padding:15px;
+
+/* ===== Navbar ===== */
+
+#navbar{
+    background:white;
+    border-radius:22px;
+    padding:16px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    animation:show .4s ease;
 }
 
-#left{
+
+#profile{
     display:flex;
     flex-direction:column;
 }
 
+
 #name{
     font-size:22px;
-    font-weight:bold;
+    font-weight:800;
+    color:#222;
+
+    margin-bottom:10px;
 }
+
 
 #stats{
-    margin-top:6px;
     display:flex;
-    gap:20px;
-    color:#666;
+    gap:10px;
 }
 
-#menuBtn{
-    border:none;
-    background:none;
-    font-size:36px;
-    cursor:pointer;
+
+.stat{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    background:#f4f5ff;
+
+    padding:8px 14px;
+
+    border-radius:14px;
+
+    font-size:15px;
+    font-weight:bold;
+
 }
 
-#menu{
-    display:none;
 
-    position:fixed;
-    top:90px;
-    right:10px;
-
-    width:180px;
-
-    background:white;
-    border-radius:15px;
-
-    overflow:hidden;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
-
-#menu.show{
-    display:block;
-}
-
-#menu button{
-    width:100%;
-    padding:15px;
-    border:none;
-    background:white;
-    text-align:left;
+.icon{
     font-size:18px;
 }
 
-#menu button:hover{
-    background:#eeeeee;
+
+/* ===== Menu Button ===== */
+
+
+#menuBtn{
+
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:15px;
+
+    background:#5146e5;
+
+    color:white;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
 }
-#AddCoins {
-  position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-  width: 100px;
-  height: 75px;
-  border-radius: 12px;
+
+
+#menuBtn:active{
+
+    transform:scale(.9);
+
+}
+
+
+
+/* ===== Reward ===== */
+
+#reward{
+
+    margin-top:18px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    animation:show .5s ease;
+}
+
+
+
+.rewardText h2{
+
+    font-size:20px;
+
+    color:#222;
+
+}
+
+
+.rewardText p{
+
+    margin-top:7px;
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+
+
+#claimBtn{
+
+    border:none;
+
+    background:#5146e5;
+
+    color:white;
+
+    padding:11px 18px;
+
+    border-radius:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+#claimBtn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* ===== Menu ===== */
+
+
+#menu{
+
+    display:none;
+
+    position:fixed;
+
+    top:85px;
+
+    right:12px;
+
+    width:190px;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+}
+
+
+#menu.show{
+
+    display:block;
+
+    animation:drop .25s ease;
+
+}
+
+
+
+#menu button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    background:white;
+
+    text-align:left;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+
+#menu button:hover{
+
+    background:#f2f3ff;
+
+    padding-left:20px;
+
+}
+
+
+
+#logoutBtn{
+
+    color:#e53935;
+
+}
+
+
+
+/* ===== Animation ===== */
+
+
+@keyframes show{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes drop{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
 }
