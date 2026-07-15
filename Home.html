@@ -3,33 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="Home.css">
+    <title>Level Up Math</title>
+    <link rel="stylesheet" href="Css/Home.css">
 </head>
+
 <body>
 
-<div id="navbar">
+<header id="navbar">
 
-    <div id="left">
-        <div id="name">Loading...</div>
+    <div id="profile">
+
+        <div id="name">
+            Loading...
+        </div>
 
         <div id="stats">
-            <p>🏆 Оноо: <span id="score">0</span></p>
-            <p>⭐ Level: <span id="level">1</span></p>
+
+            <div class="stat">
+                <span class="icon">🏆</span>
+                <span id="score">0</span>
+            </div>
+
+            <div class="stat">
+                <span class="icon">⭐</span>
+                <span id="level">1</span>
+            </div>
+            
+
         </div>
+
     </div>
 
-    <button id="menuBtn">☰</button>
-</div>
 
-<div id="menu">
-    <button id="topBtn">🌎 World Top</button>
-    <button id="GameBtn"> ➕ Math </button>
-     <button id="logoutBtn">🚪 Гарах</button>
-</div>
+    <button id="menuBtn" aria-label="Menu">
+        ☰
+    </button>
 
-<script type="module" src="home.js"></script>
+</header>
 
+
+<section id="reward">
+
+    <div class="rewardText">
+
+        <h2>Level Up Math</h2>
+
+        <p>
+            ⭐ +50 Level
+        </p>
+
+        <p>
+            ⏱ 20 min • 25 test
+        </p>
+
+    </div>
+
+
+    <button id="claimBtn">
+        эхлүүлэх
+    </button>
+
+</section>
+
+
+<nav id="menu">
+
+    <button id="topBtn">
+        🌎 World Top
+    </button>
+
+    <button id="gameBtn">
+        ➕ Math
+    </button>
+
+    <button id="exchangeBtn">
+        🏆100 => ⭐1
+    </button>
+
+    <button id="settingsBtn">
+        ⚙ Settings
+    </button>
+
+    <button id="logoutBtn">
+        🚪 Гарах
+    </button>
+    
+
+</nav>
+
+
+<script type="module" src="js/home.js"></script>
 
 </body>
 </html>
