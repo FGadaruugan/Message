@@ -6,35 +6,70 @@ query,
 orderBy,
 limit,
 getDocs
-} 
+}
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 
 const topList = document.getElementById("topList");
 
 async function loadTop(){
 
-    const q = query(
-        collection(db,"users"),
-        orderBy("score","desc"),
-        limit(10)
-    );
+const q = query(  
+    collection(db,"users"),  
+    orderBy("level","desc"),  
+    limit(10)  
+);  
 
-    const snap = await getDocs(q);
+const snap = await getDocs(q);  
 
-    let html = `
+let html = `  
 
-    <div class="topHeader">
-        <span>Top</span>
-        <span>Name</span>
-        <span>Lv</span>
-        <span>Score</span>
-    </div>
+<div class="topHeader">  
+    <span>Top</span>  
+    <span>Name</span>  
+    <span>Lv</span>  
+    <span>Score</span>  
+</div>  
 
-    `;
+`;  
 
-    let rank = 1;
+let rank = 1;  
 
+snap.forEach((doc)=>{  
+
+    const user = doc.data();  
+
+    html += `  
+
+    <div class="topRow">  
+
+        <span>${rank}</span>  
+
+        <span>  
+        ${user.firstname} ${user.lastname}  
+        </span>  
+
+        <span>  
+        ⭐ ${user.level}  
+        </span>  
+
+        <span>  
+        🏆 ${user.score}  
+        </span>  
+
+    </div>  
+
+    `;  
+
+    rank++;  
+
+});  
+
+
+topList.innerHTML = html;
+
+}
+
+loadTop();
     snap.forEach((doc)=>{
 
         const user = doc.data();
