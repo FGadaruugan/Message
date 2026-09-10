@@ -1,35 +1,938 @@
+```html
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>logni</title>
-    <link rel="stylesheet" href="Style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>10В ангийн хичээлийн хуваарь</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #111;
+      --white: #fff;
+      --background: #f4f4f4;
+      --border: #dedede;
+      --gray: #666;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--black);
+      font-family: Arial, "Noto Sans", sans-serif;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1250px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+
+    /* =========================
+       TOP BAR
+    ========================= */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 12px;
+
+      background: #111;
+      color: white;
+
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .brand-text h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .brand-text p {
+      margin: 4px 0 0;
+      color: #777;
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       DOWNLOAD BUTTON
+    ========================= */
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      border: none;
+      border-radius: 11px;
+
+      padding: 12px 19px;
+
+      background: #111;
+      color: white;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: 0.15s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .download-btn:active {
+      transform: scale(0.97);
+    }
+
+    .download-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+      transform: none;
+    }
+
+    .download-icon {
+      font-size: 18px;
+    }
+
+
+    /* =========================
+       SCREEN PAPER
+    ========================= */
+
+    .paper {
+      width: 100%;
+
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      padding: 30px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.06);
+    }
+
+
+    /* =========================
+       TITLE
+    ========================= */
+
+    .title-area {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 22px;
+    }
+
+    .title-left h1 {
+      margin: 0;
+
+      font-size: 30px;
+      font-weight: 900;
+
+      letter-spacing: -0.5px;
+    }
+
+    .title-left p {
+      margin: 6px 0 0;
+
+      color: #777;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .class-badge {
+      padding: 8px 13px;
+
+      border: 2px solid #111;
+      border-radius: 9px;
+
+      font-size: 13px;
+      font-weight: 900;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-box {
+      width: 100%;
+
+      overflow: hidden;
+
+      border: 2px solid #111;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      text-align: center;
+      vertical-align: middle;
+
+      border-right: 1px solid #111;
+      border-bottom: 1px solid #111;
+
+      padding: 12px 6px;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th {
+      background: #111;
+      color: white;
+
+      font-size: 15px;
+      font-weight: 900;
+
+      height: 52px;
+    }
+
+    td {
+      background: white;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      height: 63px;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    th:first-child,
+    td:first-child {
+      width: 8%;
+    }
+
+    th:not(:first-child),
+    td:not(:first-child) {
+      width: 18.4%;
+    }
+
+    .period {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 14px;
+
+      color: #777;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .app {
+        padding: 12px 7px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand {
+        justify-content: center;
+      }
+
+      .download-btn {
+        width: 100%;
+      }
+
+      .paper {
+        padding: 13px 6px;
+
+        border-radius: 12px;
+      }
+
+      .title-area {
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+
+        gap: 10px;
+
+        margin-bottom: 15px;
+      }
+
+      .title-left h1 {
+        font-size: 20px;
+      }
+
+      .title-left p {
+        font-size: 10px;
+      }
+
+      .class-badge {
+        font-size: 10px;
+        padding: 5px 9px;
+      }
+
+      .table-box {
+        border-radius: 6px;
+      }
+
+      th {
+        height: 40px;
+
+        padding: 5px 1px;
+
+        font-size: 8.5px;
+      }
+
+      td {
+        height: 47px;
+
+        padding: 5px 1px;
+
+        font-size: 8.7px;
+
+        line-height: 1.15;
+
+        overflow-wrap: anywhere;
+      }
+
+      .period {
+        font-size: 11px;
+      }
+
+      .footer {
+        font-size: 8px;
+      }
+    }
+
+
+    /* ==================================================
+       PDF EXPORT MODE
+       Screen дизайнаас ТУСДАА
+    ================================================== */
+
+    .paper.pdf-mode {
+      width: 277mm !important;
+
+      padding: 10mm 11mm !important;
+
+      background: white !important;
+
+      border: none !important;
+      border-radius: 0 !important;
+
+      box-shadow: none !important;
+    }
+
+
+    .paper.pdf-mode .title-area {
+      align-items: center;
+
+      margin-bottom: 7mm;
+    }
+
+
+    .paper.pdf-mode .title-left h1 {
+      font-size: 24pt !important;
+
+      letter-spacing: 0 !important;
+    }
+
+
+    .paper.pdf-mode .title-left p {
+      margin-top: 2mm;
+
+      font-size: 10pt !important;
+
+      color: #555 !important;
+    }
+
+
+    .paper.pdf-mode .class-badge {
+      padding: 2.5mm 4mm;
+
+      border: 1.5pt solid black;
+
+      border-radius: 2mm;
+
+      font-size: 10pt;
+    }
+
+
+    .paper.pdf-mode .table-box {
+      border: 1.8pt solid black;
+
+      border-radius: 0;
+
+      overflow: visible;
+    }
+
+
+    .paper.pdf-mode table {
+      width: 100%;
+    }
+
+
+    .paper.pdf-mode th {
+      height: 13mm !important;
+
+      padding: 2mm !important;
+
+      background: black !important;
+      color: white !important;
+
+      font-size: 11pt !important;
+
+      border-right: 0.8pt solid white;
+      border-bottom: 1.5pt solid black;
+    }
+
+
+    .paper.pdf-mode td {
+      height: 15mm !important;
+
+      padding: 2mm 1.5mm !important;
+
+      background: white !important;
+      color: black !important;
+
+      font-size: 10.5pt !important;
+
+      line-height: 1.15 !important;
+
+      border-right: 0.8pt solid black;
+      border-bottom: 0.8pt solid black;
+    }
+
+
+    .paper.pdf-mode tbody tr:nth-child(even) td {
+      background: #f7f7f7 !important;
+    }
+
+
+    .paper.pdf-mode .period {
+      font-size: 12pt !important;
+      font-weight: 900;
+    }
+
+
+    .paper.pdf-mode .footer {
+      margin-top: 4mm;
+
+      font-size: 8pt !important;
+
+      color: #555 !important;
+    }
+
+  </style>
 </head>
+
+
 <body>
 
-<div id="game">
+  <div class="app">
 
-    <input id="email" type="email" placeholder="Имэйлээ оруулна уу">
+    <!-- WEB HEADER -->
+    <div
+      class="topbar"
+      data-html2canvas-ignore="true"
+    >
 
-    <input id="password" type="password" placeholder="нууц үгээ оруулна уу">
+      <div class="brand">
 
-    <a href="#" id="forgot">Нууц үг мартсан?</a>
+        <div class="logo">
+          10В
+        </div>
 
-    <button id="loginBtn">Нэвтрэх</button>
+        <div class="brand-text">
+          <h2>Хичээлийн хуваарь</h2>
+          <p>Weekly Class Schedule</p>
+        </div>
 
-    <div class="divider">
-        <span>Эсвэл</span>
+      </div>
+
+
+      <button
+        id="downloadBtn"
+        class="download-btn"
+        onclick="downloadPDF()"
+        type="button"
+      >
+
+        <span class="download-icon">
+          ↓
+        </span>
+
+        <span id="downloadText">
+          PDF татах
+        </span>
+
+      </button>
+
     </div>
 
-    <div id="image"></div>
 
-    <p class="signup-text">
-        Бүртгэл байхгүй юу?
-        <a href="Sing.html">Бүртгэл үүсгэх</a>
-    </p>
+    <!-- PDF CONTENT -->
+    <main
+      id="schedule"
+      class="paper"
+    >
 
-</div>
-<script type="module" src="app.js"></script>
+      <div class="title-area">
+
+        <div class="title-left">
+
+          <h1>
+            10В ангийн хичээлийн хуваарь
+          </h1>
+
+          <p>
+            Долоо хоногийн хичээлийн хуваарь
+          </p>
+
+        </div>
+
+
+        <div class="class-badge">
+          10В АНГИ
+        </div>
+
+      </div>
+
+
+      <div class="table-box">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Цаг</th>
+
+              <th>Даваа</th>
+
+              <th>Мягмар</th>
+
+              <th>Лхагва</th>
+
+              <th>Пүрэв</th>
+
+              <th>Баасан</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr>
+
+              <td class="period">1</td>
+
+              <td>Хими</td>
+
+              <td>Англи хэл</td>
+
+              <td>Нийгэм судлал</td>
+
+              <td>Физик</td>
+
+              <td>Англи хэл</td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">2</td>
+
+              <td>Хими</td>
+
+              <td>
+                Мэдээллийн<br>
+                технологи
+              </td>
+
+              <td>
+                Нийгэм судлал
+              </td>
+
+              <td>Физик</td>
+
+              <td>Түүх</td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">3</td>
+
+              <td>Газар зүй</td>
+
+              <td>Биологи</td>
+
+              <td>
+                Дизайн технологи
+              </td>
+
+              <td>
+                Монгол бичиг
+              </td>
+
+              <td>
+                Математик
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">4</td>
+
+              <td>Газар зүй</td>
+
+              <td>Биологи</td>
+
+              <td>
+                Дизайн технологи
+              </td>
+
+              <td>
+                Монгол бичиг
+              </td>
+
+              <td>
+                Уран зохиол
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">5</td>
+
+              <td>
+                Биеийн тамир
+              </td>
+
+              <td>
+                Математик
+              </td>
+
+              <td>
+                Математик<br>
+                (сонгон)
+              </td>
+
+              <td>
+                Англи хэл
+              </td>
+
+              <td>
+                Биеийн тамир
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">6</td>
+
+              <td>
+                Англи хэл<br>
+                (сонгох)
+              </td>
+
+              <td>
+                Монгол хэл
+              </td>
+
+              <td>
+                Математик<br>
+                (сонгон)
+              </td>
+
+              <td>
+                ИЁБ
+              </td>
+
+              <td>
+                Эрүүл мэнд
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="period">7</td>
+
+              <td>
+                Англи хэл<br>
+                (сонгох)
+              </td>
+
+              <td>
+                Математик
+              </td>
+
+              <td>
+                Сонгох-1
+              </td>
+
+              <td>
+                ИЁБ
+              </td>
+
+              <td>
+                Сонгох-2
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="footer">
+
+        <span>
+          10В • ХИЧЭЭЛИЙН ХУВААРЬ
+        </span>
+
+        <span>
+          7 хичээлийн цаг
+        </span>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- PDF LIBRARY -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
+  </script>
+
+
+  <script>
+
+    async function downloadPDF() {
+
+      const button =
+        document.getElementById("downloadBtn");
+
+      const text =
+        document.getElementById("downloadText");
+
+      const schedule =
+        document.getElementById("schedule");
+
+
+      button.disabled = true;
+
+      text.textContent =
+        "Татаж байна...";
+
+
+      /*
+        PDF татах үед screen responsive
+        хэмжээг ашиглахгүй.
+
+        A4 зориулсан pdf-mode ашиглана.
+      */
+
+      schedule.classList.add(
+        "pdf-mode"
+      );
+
+
+      const options = {
+
+        margin: 0,
+
+        filename:
+          "10V_angiin_hicheeliin_huvaari.pdf",
+
+        image: {
+
+          type: "jpeg",
+
+          quality: 1
+
+        },
+
+        html2canvas: {
+
+          /*
+            3 = өмнөхөөс илүү өндөр чанар.
+          */
+
+          scale: 3,
+
+          useCORS: true,
+
+          backgroundColor:
+            "#ffffff",
+
+          scrollX: 0,
+
+          scrollY: 0
+
+        },
+
+        jsPDF: {
+
+          unit: "mm",
+
+          format: "a4",
+
+          orientation: "landscape",
+
+          compress: true
+
+        },
+
+        pagebreak: {
+
+          mode: [
+            "avoid-all",
+            "css"
+          ]
+
+        }
+
+      };
+
+
+      try {
+
+        await html2pdf()
+          .set(options)
+          .from(schedule)
+          .save();
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "PDF ERROR:",
+          error
+        );
+
+        alert(
+          "PDF татах явцад алдаа гарлаа."
+        );
+
+      }
+
+      finally {
+
+        /*
+          PDF дууссаны дараа
+          web/mobile UI буцаана.
+        */
+
+        schedule.classList.remove(
+          "pdf-mode"
+        );
+
+        button.disabled = false;
+
+        text.textContent =
+          "PDF татах";
+
+      }
+
+    }
+
+  </script>
+
 </body>
 </html>
+```
+
+,
