@@ -1,5 +1,6 @@
+function notify(message) { document.getElementById("status").textContent = message; }
 import { login, forgotPassword } from "./auth.js";
-import { googleLogin } from "./auth.js";
+import { googleLogin, ensureProfile } from "./auth.js";
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
@@ -8,27 +9,31 @@ const forgot = document.getElementById("forgot");
 
 
 // Login
-loginBtn.addEventListener("click", async () => {
+document.getElementById("authForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (loginBtn.disabled) return;
 
     const userEmail = email.value.trim();
     const userPassword = password.value;
 
     if(userEmail === "" || userPassword === ""){
-        alert("Имэйл болон нууц үгээ оруулна уу");
+        notify("Имэйл болон нууц үгээ оруулна уу");
         return;
     }
 
+    loginBtn.disabled = true;
     try {
 
         await login(userEmail, userPassword);
 
-        alert("Амжилттай нэвтэрлээ!");
+        notify("Амжилттай нэвтэрлээ!");
 
         window.location.href = "Home.html";
 
     } catch(error) {
 
-        alert(error.message);
+        notify("Үйлдэл амжилтгүй. Мэдээлэл болон интернет холболтоо шалгаарай.");
+        loginBtn.disabled = false;
 
     }
 
@@ -43,7 +48,7 @@ forgot.addEventListener("click", async (e) => {
     const userEmail = email.value.trim();
 
     if(userEmail === ""){
-        alert("Эхлээд имэйлээ оруулна уу");
+        notify("Эхлээд имэйлээ оруулна уу");
         return;
     }
 
@@ -51,11 +56,12 @@ forgot.addEventListener("click", async (e) => {
 
         await forgotPassword(userEmail);
 
-        alert("Нууц үг солих холбоос имэйл рүү явлаа");
+        notify("Нууц үг солих холбоос имэйл рүү явлаа");
 
     } catch(error){
 
-        alert(error.message);
+        notify("Үйлдэл амжилтгүй. Мэдээлэл болон интернет холболтоо шалгаарай.");
+        loginBtn.disabled = false;
 
     }
 
@@ -67,15 +73,17 @@ googleBtn.addEventListener("click", async()=>{
 
     try{
 
-        await googleLogin();
+        const credential = await googleLogin();
+        await ensureProfile(credential.user);
 
-        alert("Google-ээр амжилттай нэвтэрлээ!");
+        notify("Google-ээр амжилттай нэвтэрлээ!");
 
         window.location.href="Home.html";
 
     }catch(error){
 
-        alert(error.message);
+        notify("Үйлдэл амжилтгүй. Мэдээлэл болон интернет холболтоо шалгаарай.");
+        loginBtn.disabled = false;
 
     }
 

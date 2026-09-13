@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>logni</title>
-    <link rel="stylesheet" href="Style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#256052">
+<title>Тавтай морил! · Level Up</title>
+<link rel="stylesheet" href="ui.css">
 </head>
-<body>
-
-<div id="game">
-
-    <input id="email" type="email" placeholder="Имэйлээ оруулна уу">
-
-    <input id="password" type="password" placeholder="нууц үгээ оруулна уу">
-
-    <a href="#" id="forgot">Нууц үг мартсан?</a>
-
-    <button id="loginBtn">Нэвтрэх</button>
-
-    <div class="divider">
-        <span>Эсвэл</span>
-    </div>
-
-    <div id="image"></div>
-
-    <p class="signup-text">
-        Бүртгэл байхгүй юу?
-        <a href="Sing.html">Бүртгэл үүсгэх</a>
-    </p>
-
+<body class="auth-page">
+<main class="auth-layout">
+<section class="auth-intro">
+<a class="brand" href="Home.html">
+<span class="brand-icon">↗</span> Level Up<span class="brand-tag">MATH</span>
+</a>
+<span class="eyebrow">ӨДӨР БҮР БАГА БАГААР</span>
+<h1>Бод.<br>Сур.<br>
+<em>Ахиц гарга.</em>
+</h1>
+<p>Математикаа давтаж, өөрийгөө сориорой.</p>
+<div class="math-art" aria-hidden="true">
+<span>+</span>
+<span>×</span>
+<span>÷</span>
+<span>=</span>
 </div>
-<script type="module" src="App.js"></script>
+</section>
+<section id="game" class="card auth-card">
+<h2>Тавтай морил!</h2>
+<p class="muted">Нэвтрээд дасгалаа үргэлжлүүлээрэй.</p>
+<form id="authForm">
+<label>Имэйл<input id="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+</label>
+<label>Нууц үг<input id="password" type="password" autocomplete="current-password"  placeholder="Нууц үгээ оруулна уу" required>
+</label>
+<a id="forgot" href="#">Нууц үг мартсан?</a>
+<button id="loginBtn" type="submit">Нэвтрэх →</button>
+</form>
+<p id="status" role="status" aria-live="polite">
+</p>
+<div class="divider">эсвэл</div>
+<button type="button" class="secondary" id="image">Google-ээр үргэлжлүүлэх</button>
+<p class="muted">Шинэ хэрэглэгч үү? <a href="Sing.html">Бүртгэл үүсгэх</a>
+</p>
+</section>
+</main>
+<script type="module" src="app.js">
+</script>
 </body>
 </html>

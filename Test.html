@@ -1,66 +1,44 @@
 <!DOCTYPE html>
 <html lang="mn">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Math Test</title>
-
-<link rel="stylesheet" href="Test.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#256052">
+<title>Тест · Level Up</title>
+<link rel="stylesheet" href="ui.css">
 </head>
-
-
-<body>
-
-
-<h1>Math Test</h1>
-
-
-<div id="info">
-
-    <div>
-        ⏱ <span id="time">20:00</span>
-    </div>
-
-
-    <div>
-        ✅ <span id="answered">0</span> /
-        ❌ <span id="unanswered">25</span>
-    </div>
-
+<body class="">
+<header class="bar">
+<a class="brand" href="Home.html">
+<span class="brand-icon">↗</span> Level Up<span class="brand-tag">MATH</span>
+</a>
+<a class="subtle" href="Home.html">← Нүүр</a>
+</header>
+<main class="narrow">
+<span class="eyebrow">25 АСУУЛТ · 20 МИНУТ</span>
+<h1>Өөрийгөө сориорой.</h1>
+<div id="info" class="test-info">
+<span>Үлдсэн хугацаа <strong id="time">20:00</strong>
+</span>
+<span>
+<b id="answered">0</b> хариулсан · <b id="unanswered">25</b> үлдсэн</span>
 </div>
-
-
-
-<div id="testBox">
-
-
-    <h2 id="question">
-        Loading...
-    </h2>
-
-
-    <div id="answers"></div>
-
-
-    <button id="nextBtn">
-        Next
-    </button>
-
-
+<progress id="progress" max="25" value="0" aria-label="Тестийн явц">
+</progress>
+<section id="testBox" class="card exercise">
+<h2 id="question">Уншиж байна…</h2>
+<div id="answers">
 </div>
-
-
-
-<h2 id="result"></h2>
-
-
-
-<script type="module" src="Test.js"></script>
-
-
+<button id="nextBtn">Дараагийн асуулт →</button>
+</section>
+<p id="result" role="status">
+</p>
+<div class="actions">
+<a class="button secondary" href="Result.html">Хариугаа харах</a>
+<a class="subtle" href="Home.html">Нүүр рүү буцах</a>
+</div>
+</main>
+<script type="module" src="Test.js">
+</script>
 </body>
-
 </html>
