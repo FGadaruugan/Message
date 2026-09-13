@@ -157,332 +157,66 @@ const questions = [
 ];
 
 
-// 25 болгохын тулд энд асуулт нэмнэ
 
-
-let index = 0;
-let score = 0;
-let answered = 0;
-
-let time = 1200;
-
-
-let userAnswers = [];
-
-
-
-const question =
-document.getElementById("question");
-
-const answers =
-document.getElementById("answers");
-
-const nextBtn =
-document.getElementById("nextBtn");
-
-const result =
-document.getElementById("result");
-
-
-const timeText =
-document.getElementById("time");
-
-const answeredText =
-document.getElementById("answered");
-
-const unansweredText =
-document.getElementById("unanswered");
-
-
-
-
-
-function loadQuestion(){
-
-
-    let q = questions[index];
-
-
-    question.textContent =
-    `${index + 1}. ${q.q}`;
-
-
-    answers.innerHTML = "";
-
-
-
-    q.a.forEach(answer=>{
-
-
-        let btn =
-        document.createElement("button");
-
-
-        btn.textContent = answer;
-
-
-
-        btn.onclick = ()=>{
-
-
-            if(btn.classList.contains("done"))
-                return;
-
-
-
-            btn.classList.add("done");
-
-
-
-            userAnswers.push({
-
-                question:q.q,
-
-                selected:answer,
-
-                correct:q.c,
-
-                result:answer === q.c
-
-            });
-
-
-
-            answered++;
-
-
-            answeredText.textContent =
-            answered;
-
-
-            unansweredText.textContent =
-            questions.length - answered;
-
-
-
-            if(answer === q.c){
-
-
-                score++;
-
-
-                btn.style.background =
-                "#4caf50";
-
-
-                btn.style.color =
-                "white";
-
-
-            }
-            else{
-
-
-                btn.style.background =
-                "#e53935";
-
-
-                btn.style.color =
-                "white";
-
-
-            }
-
-
-
-
-            document
-            .querySelectorAll("#answers button")
-            .forEach(b=>{
-
-                b.disabled = true;
-
-            });
-
-
-
-            nextBtn.style.display =
-            "block";
-
-
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+const question = document.getElementById("question"), answers = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn"), result = document.getElementById("result");
+const actions = document.querySelector(".actions"); actions.hidden = true;
+let index = 0, score = 0, records = [], locked = false, finished = false, timer, deadline, payload;
+function loadQuestion() {
+    locked = false; nextBtn.hidden = true; answers.replaceChildren();
+    question.textContent = `${index+1}. ${questions[index].q}`;
+    for (const value of questions[index].a) {
+        const button = document.createElement("button"); button.textContent = value;
+        button.onclick = () => {
+            if (locked || finished) return;
+            locked = true;
+            const q = questions[index], right = value === q.c;
+            if (right) score++;
+            records.push({ question:q.q, selected:value, correct:q.c, result:right });
+            for (const b of answers.children) b.disabled = true;
+            button.style.background = right ? "#dce9cb" : "#f9ded8";
+            button.textContent = `${value} ${right ? "✓" : "✕"}`;
+            document.getElementById("answered").textContent = records.length;
+            document.getElementById("unanswered").textContent = questions.length-records.length;
+            document.getElementById("progress").value = records.length;
+            nextBtn.hidden = false;
+            nextBtn.textContent = index === questions.length-1 ? "Дуусгах →" : "Дараагийн асуулт →";
         };
-
-
-
-        answers.appendChild(btn);
-
-
-    });
-
-
+        answers.append(button);
+    }
 }
-
-
-
-
-
-
-
-async function finishTest(){
-
-
-    clearInterval(timer);
-
-
-
-    const user =
-    auth.currentUser;
-
-
-
-    if(user){
-
-
-        // 1 зөв = 2 Level
-        let levelReward = score * 2;
-
-
-
-        // Level өгөхгүй,
-        // зөвхөн хадгална
-
-        await updateUser(user.uid,{
-
-
-            lastTestScore:score,
-
-
-            lastTestTotal:
-            questions.length,
-
-
-            levelReward:levelReward,
-
-
-            rewardClaimed:false,
-
-
-            lastTestTime:
-            new Date()
-            .toLocaleTimeString(),
-
-
-            lastTestDate:
-            Date.now(),
-
-
-            answers:userAnswers
-
-
-        });
-
-
+async function saveResult() {
+    result.textContent = "Үр дүнг хадгалж байна…";
+    try {
+        await updateUser(auth.currentUser.uid, payload);
+        result.textContent = `Оноо: ${score}/${questions.length}. Үр дүн хадгалагдлаа!`;
+        actions.hidden = false;
+    } catch {
+        result.textContent = "Хадгалж чадсангүй. Холболтоо шалгаад дахин оролдоорой. ";
+        const retry = document.createElement("button"); retry.textContent = "Дахин хадгалах";
+        retry.onclick = saveResult; result.append(retry);
     }
-
-
-
-
-    document.getElementById("testBox")
-    .style.display="none";
-
-
-
-    result.textContent =
-
-    `🎉 Оноо: ${score}/${questions.length}`;
-
 }
-
-
-
-
-
-
-
-nextBtn.onclick = ()=>{
-
-
-    index++;
-
-
-    nextBtn.style.display =
-    "none";
-
-
-
-    if(index < questions.length){
-
-
-        loadQuestion();
-
-
-    }
-    else{
-
-
-        finishTest();
-
-
-    }
-
-
-};
-
-
-
-
-
-
-
-let timer = setInterval(()=>{
-
-
-    let min =
-    Math.floor(time / 60);
-
-
-    let sec =
-    time % 60;
-
-
-
-    timeText.textContent =
-
-    `${min}:${sec < 10 ? "0"+sec : sec}`;
-
-
-
-    time--;
-
-
-
-    if(time < 0){
-
-
-        finishTest();
-
-
-    }
-
-
-},1000);
-
-
-
-
-
-
-
-
-nextBtn.style.display="none";
-
-
-answeredText.textContent = 0;
-
-
-unansweredText.textContent =
-questions.length;
-
-
-
-loadQuestion();
+function finish() {
+    if (finished) return;
+    finished = true; clearInterval(timer);
+    document.getElementById("testBox").hidden = true;
+    const elapsed = Math.min(1200, Math.max(0, Math.floor((Date.now()-(deadline-1200000))/1000)));
+    payload = {lastTestScore:score,lastTestTotal:questions.length,levelReward:score*2,rewardClaimed:false,
+        lastTestTime:`${Math.floor(elapsed/60)}:${String(elapsed%60).padStart(2,"0")}`,lastTestDate:Date.now(),
+        answers:questions.map((q,i)=>records[i] ?? {question:q.q,selected:"Хариулаагүй",correct:q.c,result:false})};
+    saveResult();
+}
+nextBtn.onclick = () => { if (!locked || finished) return; if (++index < questions.length) loadQuestion(); else finish(); };
+nextBtn.hidden = true;
+onAuthStateChanged(auth, user => {
+    if (!user) { location.href="index.html"; return; }
+    if (deadline) return;
+    deadline = Date.now()+1200000; loadQuestion();
+    timer = setInterval(() => {
+        const remaining = Math.max(0, Math.ceil((deadline-Date.now())/1000));
+        document.getElementById("time").textContent = `${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,"0")}`;
+        if (!remaining) finish();
+    }, 1000);
+});

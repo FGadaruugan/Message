@@ -1,4 +1,4 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
     createUserWithEmailAndPassword,
@@ -55,4 +55,13 @@ export async function googleLogin(){
         provider
     );
 
+}
+
+export async function ensureProfile(user) {
+    const { doc, runTransaction } = await import("https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js");
+    const ref = doc(db, "users", user.uid);
+    await runTransaction(db, async tx => {
+        const snap = await tx.get(ref);
+        if (!snap.exists()) tx.set(ref, {firstname:user.displayName || "Суралцагч",lastname:"",email:user.email || "",score:0,level:1});
+    });
 }

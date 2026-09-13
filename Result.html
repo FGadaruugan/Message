@@ -1,46 +1,35 @@
 <!DOCTYPE html>
 <html lang="mn">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Result</title>
-
-<link rel="stylesheet" href="Result.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#256052">
+<title>Үр дүн · Level Up</title>
+<link rel="stylesheet" href="ui.css">
 </head>
-
-
-<body>
-
-
-<h1>📋 Test Result</h1>
-
-
-<div id="resultBox">
-
-
-<h2 id="score">
-Loading...
-</h2>
-
-
-<p id="time"></p>
-
-
-<button id="backBtn">
-🏠 Home
-</button>
-
-
+<body class="">
+<header class="bar">
+<a class="brand" href="Home.html">
+<span class="brand-icon">↗</span> Level Up<span class="brand-tag">MATH</span>
+</a>
+<a class="subtle" href="Home.html">← Нүүр</a>
+</header>
+<main class="narrow">
+<span class="eyebrow">ЧИНИЙ АХИЦ</span>
+<h1>Тестийн үр дүн</h1>
+<section id="resultBox" class="card">
+<h2 id="score">Уншиж байна…</h2>
+<p id="time">
+</p>
+<div class="actions">
+<a class="button" href="Test.html">Дахин тест өгөх →</a>
+<button class="secondary" id="backBtn">Нүүр</button>
 </div>
-<div id="answersList"></div>
-
-
-<script type="module" src="Result.js"></script>
-
-
+</section>
+<div id="answersList">
+</div>
+</main>
+<script type="module" src="Result.js">
+</script>
 </body>
-
 </html>

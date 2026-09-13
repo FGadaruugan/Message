@@ -1,3 +1,4 @@
+function notify(message) { document.getElementById("status").textContent = message; }
 import { register } from "./auth.js";
 import { db } from "./firebase.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -9,7 +10,9 @@ const password = document.getElementById("password");
 
 const signupBtn = document.getElementById("signupBtn");
 
-signupBtn.addEventListener("click", async () => {
+document.getElementById("authForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (signupBtn.disabled) return;
 
     if (
         firstname.value.trim() === "" ||
@@ -17,10 +20,11 @@ signupBtn.addEventListener("click", async () => {
         email.value.trim() === "" ||
         password.value === ""
     ) {
-        alert("Бүх мэдээллээ бөглөнө үү.");
+        notify("Бүх мэдээллээ бөглөнө үү.");
         return;
     }
 
+    signupBtn.disabled = true;
     try {
 
         const userCredential = await register(
@@ -36,11 +40,12 @@ await setDoc(doc(db, "users", userCredential.user.uid), {
     level: 1
 });
 
-        alert("Бүртгэл амжилттай үүслээ!");
-        window.location.href ="index.html";
+        notify("Бүртгэл амжилттай үүслээ!");
+        window.location.href ="Home.html";
 
     } catch (error) {
-        alert(error.message);
+        notify("Үйлдэл амжилтгүй. Мэдээлэл болон интернет холболтоо шалгаарай.");
+        signupBtn.disabled = false;
     }
 
 });

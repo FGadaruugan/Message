@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <title>Бүртгэл үүсгэх</title>
-    <link rel="stylesheet" href="Style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#256052">
+<title>Бүртгэл үүсгэх · Level Up</title>
+<link rel="stylesheet" href="ui.css">
 </head>
-
-<body>
-
-<div id="game">
-
-    <input id="firstname" type="text" placeholder="Нэр">
-
-    <input id="lastname" type="text" placeholder="Овог">
-
-    <input id="email" type="email" placeholder="Имэйл">
-
-    <input id="password" type="password" placeholder="Шинэ нууц үг">
-
-    <button id="signupBtn">
-        Бүртгэл үүсгэх
-    </button>
-
-    <p>
-        Бүртгэлтэй юу?
-        <a href="index.html">Нэвтрэх</a>
-    </p>
-
+<body class="auth-page">
+<main class="auth-layout">
+<section class="auth-intro">
+<a class="brand" href="Home.html">
+<span class="brand-icon">↗</span> Level Up<span class="brand-tag">MATH</span>
+</a>
+<span class="eyebrow">ӨДӨР БҮР БАГА БАГААР</span>
+<h1>Бод.<br>Сур.<br>
+<em>Ахиц гарга.</em>
+</h1>
+<p>Математикаа давтаж, өөрийгөө сориорой.</p>
+<div class="math-art" aria-hidden="true">
+<span>+</span>
+<span>×</span>
+<span>÷</span>
+<span>=</span>
 </div>
-
-
-<script type="module" src="sing.js"></script>
-
+</section>
+<section id="game" class="card auth-card">
+<h2>Бүртгэл үүсгэх</h2>
+<p class="muted">Мэдээллээ бөглөөд эхлээрэй.</p>
+<form id="authForm">
+<label>Нэр<input id="firstname" autocomplete="given-name" required maxlength="60">
+</label>
+<label>Овог<input id="lastname" autocomplete="family-name" required maxlength="60">
+</label>
+<label>Имэйл<input id="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+</label>
+<label>Нууц үг<input id="password" type="password" autocomplete="new-password" minlength=6 placeholder="Нууц үгээ оруулна уу" required>
+</label>
+<button id="signupBtn" type="submit">Бүртгэл үүсгэх</button>
+</form>
+<p id="status" role="status" aria-live="polite">
+</p>
+<p class="muted">Бүртгэлтэй юу? <a href="index.html">Нэвтрэх</a>
+</p>
+</section>
+</main>
+<script type="module" src="sing.js">
+</script>
 </body>
 </html>

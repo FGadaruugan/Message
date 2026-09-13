@@ -1,98 +1,75 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level Up Math</title>
-    <link rel="stylesheet" href="Home.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#256052">
+<title>Нүүр · Level Up</title>
+<link rel="stylesheet" href="ui.css">
 </head>
-
-<body>
-
-<header id="navbar">
-
-    <div id="profile">
-
-        <div id="name">
-            Loading...
-        </div>
-
-        <div id="stats">
-
-            <div class="stat">
-                <span class="icon">🏆</span>
-                <span id="score">0</span>
-            </div>
-
-            <div class="stat">
-                <span class="icon">⭐</span>
-                <span id="level">1</span>
-            </div>
-            
-
-        </div>
-
-    </div>
-
-
-    <button id="menuBtn" aria-label="Menu">
-        ☰
-    </button>
-
+<body class="">
+<header class="bar">
+<a class="brand" href="Home.html">
+<span class="brand-icon">↗</span> Level Up<span class="brand-tag">MATH</span>
+</a>
+<button class="subtle" id="logoutBtn">Гарах ↗</button>
 </header>
-
-
-<section id="reward">
-
-    <div class="rewardText">
-
-        <h2>Level Up Math</h2>
-
-        <p>
-            ⭐ +50 Level
-        </p>
-
-        <p>
-            ⏱ 20 min • 25 test
-        </p>
-
-    </div>
-
-
-    <button id="claimBtn">
-        эхлүүлэх
-    </button>
-
+<main class="shell">
+<section class="welcome">
+<div>
+<span class="eyebrow">ЧИНИЙ СУРАЛЦАХ ОРОН ЗАЙ</span>
+<h1>Сайн уу, <span id="name">суралцагч</span>!</h1>
+<p class="muted">Өнөөдөр нэг алхам урагшилъя.</p>
+</div>
+<div class="stats">
+<div class="stat">
+<span>Нийт оноо</span>
+<strong id="score">—</strong>
+</div>
+<div class="stat">
+<span>Түвшин</span>
+<strong id="level">—</strong>
+</div>
+</div>
 </section>
-
-
-<nav id="menu">
-
-    <button id="topBtn">
-        🌎 World Top
-    </button>
-
-    <button id="gameBtn">
-        ➕ Math
-    </button>
-
-    <button id="exchangeBtn">
-        🏆100 => ⭐1
-    </button>
-
-    <button id="settingsBtn">
-        ⚙ Settings
-    </button>
-
-    <button id="logoutBtn">
-        🚪 Гарах
-    </button>
-    
-
-</nav>
-
-
-<script type="module" src="home.js"></script>
-
+<section class="hero" id="reward">
+<div class="rewardText">
+<span class="eyebrow">ӨӨРИЙГӨӨ СОРЬ</span>
+<h2>Математикийн тест</h2>
+<p>Зөв хариулт бүрд +2 түвшин</p>
+<p>20 минут · 25 асуулт</p>
+<button id="claimBtn" disabled>Уншиж байна…</button>
+</div>
+<div class="hero-art" aria-hidden="true">x<span>2</span>
+<small>+ боломж</small>
+</div>
+</section>
+<p id="status" role="status">
+</p>
+<h2 class="section-title">Юу хийх вэ?</h2>
+<div class="activity-grid">
+<a class="card activity" href="Math.html">
+<span class="tile mint">＋</span>
+<h3>Түргэн дасгал</h3>
+<p>Нэмэх үйлдлээ давтаад оноо цуглуул.</p>
+<span class="card-link">Дасгал хийх ↗</span>
+</a>
+<a class="card activity" href="Test.html">
+<span class="tile lavender">✓</span>
+<h3>Тест өгөх</h3>
+<p>25 асуултаар мэдлэгээ шалга.</p>
+<span class="card-link">Эхлүүлэх ↗</span>
+</a>
+<a class="card activity" href="Top.html">
+<span class="tile peach">☆</span>
+<h3>Шилдэг 10</h3>
+<p>Түвшнээр тэргүүлж буй суралцагчид.</p>
+<span class="card-link">Жагсаалт харах ↗</span>
+</a>
+</div>
+<footer>Өөрийн хурдаар, өдөр бүр.</footer>
+</main>
+<script type="module" src="home.js">
+</script>
 </body>
 </html>

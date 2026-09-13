@@ -9,6 +9,7 @@ import {
     doc,
     getDoc,
     updateDoc,
+    runTransaction,
     increment
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -136,4 +137,15 @@ export async function addLevel(uid,amount=1){
     });
 
 
+}
+
+export async function claimTestReward(uid) {
+    const ref = doc(db, "users", uid);
+    await runTransaction(db, async transaction => {
+        const snap = await transaction.get(ref);
+        const data = snap.data();
+        if (data?.rewardClaimed === false && data.levelReward > 0) {
+            transaction.update(ref, { level: (data.level ?? 1) + data.levelReward, rewardClaimed: true });
+        }
+    });
 }
