@@ -11,7 +11,7 @@ function next() {
     correct = a+b; question.textContent = `${a} + ${b} = ?`; answer.value = "";
     busy = false; button.disabled = false;
 }
-onAuthStateChanged(auth, user => { if (!user) location.href = "index.html"; else next(); });
+onAuthStateChanged(auth, user => { if (!user) location.href = "index.html"; else { next(); window.finishLoading?.(); } });
 document.getElementById("mathForm").addEventListener("submit", async event => {
     event.preventDefault();
     if (busy || !auth.currentUser || answer.value.trim() === "") return;

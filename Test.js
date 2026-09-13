@@ -213,7 +213,7 @@ nextBtn.hidden = true;
 onAuthStateChanged(auth, user => {
     if (!user) { location.href="index.html"; return; }
     if (deadline) return;
-    deadline = Date.now()+1200000; loadQuestion();
+    deadline = Date.now()+1200000; loadQuestion(); window.finishLoading?.();
     timer = setInterval(() => {
         const remaining = Math.max(0, Math.ceil((deadline-Date.now())/1000));
         document.getElementById("time").textContent = `${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,"0")}`;

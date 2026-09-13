@@ -21,4 +21,5 @@ onAuthStateChanged(auth, async user => {
         try { await claimTestReward(user.uid); }
         catch { time.textContent += " · Шагнал авч чадсангүй. Нүүрнээс дахин оролдоорой."; }
     } catch { score.textContent="Үр дүн уншиж чадсангүй. Дахин ачаалаарай."; }
+    finally { window.finishLoading?.(); }
 });

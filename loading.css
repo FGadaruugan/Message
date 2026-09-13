@@ -1,0 +1,57 @@
+/* Small, nonblocking indicator; useful even on narrow phone screens. */
+.page-loading {
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: max(18px, env(safe-area-inset-top));
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    padding: 14px 20px;
+    border: 1px solid #d6e2d2;
+    border-radius: 20px;
+    background: #fffffff5;
+    color: #256052;
+    box-shadow: 0 10px 36px #203a3424;
+    pointer-events: none;
+    transition: opacity .2s ease;
+}
+.page-loading.is-finished { opacity: 0; }
+.page-loading strong { display: block; font-size: 15px; }
+.page-loading small { display: block; margin-top: 4px; color: #667971; font-size: 12px; }
+.loading-orbit {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: #e3eed9;
+    font-size: 25px;
+    animation: loading-breathe 1.4s ease-in-out infinite;
+}
+.loading-dots { display: flex; gap: 4px; }
+.loading-dots i { width: 5px; height: 5px; border-radius: 50%; background: #568568; animation: loading-dot 1s ease-in-out infinite; }
+.loading-dots i:nth-child(2) { animation-delay: .15s; }
+.loading-dots i:nth-child(3) { animation-delay: .3s; }
+button:disabled:not(#answers button)::after {
+    content: "";
+    display: inline-block;
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: loading-spin .75s linear infinite;
+}
+@keyframes loading-spin { to { transform: rotate(360deg); } }
+@keyframes loading-breathe { 50% { opacity: .55; } }
+@keyframes loading-dot { 50% { opacity: .25; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) {
+    .loading-orbit, .loading-dots i, button:disabled::after { animation: none !important; }
+    .page-loading { transition: none; }
+}

@@ -40,9 +40,11 @@ onAuthStateChanged(auth, async(user)=>{
 
     let data;
     try { data = await getUser(user.uid); } catch {
+        window.finishLoading?.();
         document.getElementById("status").textContent = "Мэдээлэл уншиж чадсангүй. Дахин ачаалаарай.";
         return;
     }
+    window.finishLoading?.();
     claimBtn.disabled = false;
     if (!data) data = {};
 
